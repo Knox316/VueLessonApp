@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VueJS</title>
+	<link rel="stylesheet" href="">
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+	<div id="app">
+        <button v-on:click="counter++">Increase</button>
+        <button v-on:click="counter--">Decrease</button>
+        <button v-on:click="secondCounter++">Increase Second</button>
+
+        <p>Counter: {{ counter }} | {{secondCounter }}</p>
+        <p>Result: {{ result() }} | {{ output }}</p>
+	</div>
+	<script>
+	// You may of course also outsource this script code into a separate file (e.g. app.js) and simply import this file here
+		new Vue({
+			el: '#app',
+			data: {
+                counter: 0,
+                secondCounter: 0
+            },
+            //dependent properties
+            computed: {
+                output: function() {
+                    return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+                }
+            },
+            //use computed instead
+            watch: {
+                counter: function(value) {
+                    var vm = this;
+                    setTimeout(function() {
+                        vm.counter = 0;
+                    }, 2000);
+                }
+            },
+            //methods for the vue instance
+            methods: {
+                result: function() {
+                    return this.counter > 5 ? 'Greater than 5' : 'Smaller than 5';
+                }
+            }
+		})
+	</script>
+</body>
+</html>
